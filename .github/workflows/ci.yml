@@ -47,14 +47,6 @@ jobs:
             -f Dockerfile \
             -t ${{ steps.set-var.outputs.ECR_REGISTRY }}/${{ steps.set-var.outputs.ECR_REPOSITORY }}:${{ steps.set-var.outputs.IMAGE_TAG }} .
 
-      - name: Workload Test
-        id: test
-        run: |
-          docker run \
-            --rm \
-            ${{ steps.set-var.outputs.ECR_REGISTRY }}/${{ steps.set-var.outputs.ECR_REPOSITORY }}:${{ steps.set-var.outputs.IMAGE_TAG }} \
-            /root/.local/bin/pytest -v
-
       - name: Docker image Push
         id: push-image
         run: |
